@@ -14,10 +14,10 @@ SchoolApp is a Spring Boot application designed to manage school-related feature
 
 ## Technologies Used
 
-- **Backend**: Spring Boot, Spring Security
+- **Backend**: Spring Boot, Spring Security, Spring MVC
 - **Frontend**: Thymeleaf
 - **Database**: MySQL
-- **ORM**: Spring JDBC
+- **ORM**: Spring Data JPA
 - **Build Tool**: Maven
 - **AOP**: Spring AOP for logging
 - **Password Hashing**: BCrypt
