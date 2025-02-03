@@ -7,8 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -21,10 +21,8 @@ public class ContactService {
 
         boolean isSaved = false;
         contact.setStatus(SchoolConstants.OPEN);
-        contact.setCreatedBy(SchoolConstants.ANONYMOUS);
-        contact.setCreatedAt(LocalDateTime.now());
-        int result = contactRepository.saveContactMsg(contact);
-        if (result > 0) {
+        Contact savedContact = contactRepository.save(contact);
+        if (null != savedContact && savedContact.getContactId() > 0) {
             isSaved = true;
         }
         return isSaved;
@@ -32,13 +30,21 @@ public class ContactService {
 
     public List<Contact> findMsgsWithOpenStatus() {
 
-        List<Contact> contactMsgs = contactRepository.findMsgsWithStatus(SchoolConstants.OPEN);
+        List<Contact> contactMsgs = contactRepository.findByStatus(SchoolConstants.OPEN);
         return contactMsgs;
     }
 
-    public boolean updateMsgStatus(int contactId, String updatedBy) {
+    public boolean updateMsgStatus(int contactId) {
 
-        int result = contactRepository.updateMsgStatus(contactId, SchoolConstants.CLOSE, updatedBy);
-        return (result > 0);
+        boolean isUpdated = false;
+        Optional<Contact> contact = contactRepository.findById(contactId);
+        contact.ifPresent(contact1 -> {
+            contact1.setStatus(SchoolConstants.CLOSE);
+        });
+        Contact updatedContact = contactRepository.save(contact.get());
+        if (null != updatedContact && updatedContact.getContactId() > 0) {
+            isUpdated = true;
+        }
+        return isUpdated;
     }
 }
