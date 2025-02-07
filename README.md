@@ -30,6 +30,9 @@ SchoolApp is a Spring Boot application designed to manage school-related feature
 - **Tables**:
     - `contact_msg`: Stores contact message details.
     - `holidays`: Stores holiday details.
+    - `person`: Stores user details.
+    - `roles`: Stores user roles.
+    - `address`: Stores user addresses.
 
 ### Sample Data (`data.sql`):
 
@@ -50,11 +53,6 @@ To set up the database:
 
 1. **USER**: Basic access to the dashboard.
 2. **ADMIN**: Access to manage messages and restricted areas.
-
-### Pre-Configured Users:
-
-- **User**: `user` / `12345` (Role: USER)
-- **Admin**: `admin` / `54321` (Role: ADMIN)
 
 Passwords are hashed using BCrypt for secure storage.
 
@@ -123,7 +121,5 @@ Passwords are hashed using BCrypt for secure storage.
 
 ## Future Enhancements
 
-- Add user registration and dynamic role assignment.
-- Migrate from Spring JDBC to Spring Data JPA
 - Implement pagination for contact message and holiday lists.
 - Integrate RESTful APIs for external consumption.
