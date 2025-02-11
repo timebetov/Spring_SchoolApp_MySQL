@@ -25,7 +25,7 @@ public class SecurityConfig {
                         .ignoringRequestMatchers("/public/**")
                 )
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/displayMessages").hasRole("ADMIN")
+                        .requestMatchers("/displayMessages/**").hasRole("ADMIN")
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/closeMsg").hasRole("ADMIN")
                         .requestMatchers("/student/**").hasRole("STUDENT")
