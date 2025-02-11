@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -33,10 +34,9 @@ public class SchoolUsernamePwdAuthProvider implements AuthenticationProvider {
         String pwd = authentication.getCredentials().toString();
 
         Person person = personRepository.readByEmail(email);
-        boolean pwdIsMatch = passwordEncoder.matches(pwd, person.getPwd());
-        if (null != person && person.getPersonId() > 0 && pwdIsMatch) {
+        if (null != person && person.getPersonId() > 0 && passwordEncoder.matches(pwd, person.getPwd())) {
             return new UsernamePasswordAuthenticationToken(
-                    person.getName(), null, getGrantedAuthorities(person.getRoles())
+                    email, null, getGrantedAuthorities(person.getRoles())
             );
         } else {
             throw new BadCredentialsException("Invalid credentials.");
