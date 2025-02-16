@@ -23,12 +23,14 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf
                         .ignoringRequestMatchers("/saveMsg")
                         .ignoringRequestMatchers("/public/**")
+                        .ignoringRequestMatchers("/api/**")
                 )
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/displayMessages/**").hasRole("ADMIN")
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/closeMsg").hasRole("ADMIN")
                         .requestMatchers("/student/**").hasRole("STUDENT")
+                        .requestMatchers("/api/**").authenticated()
                         .requestMatchers("/dashboard").authenticated()
                         .requestMatchers("/displayProfile").authenticated()
                         .requestMatchers("/updateProfile").authenticated()
