@@ -118,8 +118,3 @@ Passwords are hashed using BCrypt for secure storage.
 
 - `INFO: public boolean saveMessageDetails(Contact) method execution start`
 - `ERROR: public boolean updateMsgStatus(int, String) method execution failed due to: <error_message>`
-
-## Future Enhancements
-
-- Implement pagination for contact message and holiday lists.
-- Integrate RESTful APIs for external consumption.
