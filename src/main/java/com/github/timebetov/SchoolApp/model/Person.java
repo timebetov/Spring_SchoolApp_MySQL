@@ -1,5 +1,6 @@
 package com.github.timebetov.SchoolApp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.timebetov.SchoolApp.annotation.FieldsValueMatch;
 import com.github.timebetov.SchoolApp.annotation.PasswordValidator;
 import jakarta.persistence.*;
@@ -50,16 +51,19 @@ public class Person extends BaseEntity {
     @NotBlank(message = "Confirm Email must not be blank")
     @Email(message = "Please provide a valid confirm email address")
     @Transient
+    @JsonIgnore
     private String confirmEmail;
 
     @NotBlank(message = "Password must not be blank")
     @Size(min = 5, message = "Password must be at least 5 characters long")
     @PasswordValidator
+    @JsonIgnore
     private String pwd;
 
     @NotBlank(message = "Confirm Password must not be blank")
     @Size(min = 5, message = "Confirm Passowrd must be at least 6 characters long")
     @Transient
+    @JsonIgnore
     private String confirmPwd;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, targetEntity = Roles.class)
