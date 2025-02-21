@@ -1,5 +1,6 @@
 package com.github.timebetov.SchoolApp.controller;
 
+import com.github.timebetov.SchoolApp.config.TimeSchoolProps;
 import com.github.timebetov.SchoolApp.model.Contact;
 import com.github.timebetov.SchoolApp.service.ContactService;
 import jakarta.validation.Valid;

@@ -1,5 +1,6 @@
 package com.github.timebetov.SchoolApp.service;
 
+import com.github.timebetov.SchoolApp.config.TimeSchoolProps;
 import com.github.timebetov.SchoolApp.constants.SchoolConstants;
 import com.github.timebetov.SchoolApp.model.Contact;
 import com.github.timebetov.SchoolApp.repository.ContactRepository;
@@ -20,6 +21,9 @@ public class ContactService {
     @Autowired
     private ContactRepository contactRepository;
 
+    @Autowired
+    private TimeSchoolProps timeSchoolProps;
+
     public boolean saveMessageDetails(Contact contact) {
 
         boolean isSaved = false;
@@ -33,7 +37,10 @@ public class ContactService {
 
     public Page<Contact> findMsgsWithOpenStatus(int pageNum, String sortField, String sortDir) {
 
-        int pageSize = 5;
+        int pageSize = timeSchoolProps.getPageSize();
+        if (null != timeSchoolProps.getContact() && null != timeSchoolProps.getContact().get("pageSize")) {
+            pageSize = Integer.parseInt(timeSchoolProps.getContact().get("pageSize").trim());
+        }
         Pageable pageable = PageRequest.of(pageNum - 1, pageSize,
                 sortDir.equals("asc")
                         ? Sort.by(sortField).ascending()
