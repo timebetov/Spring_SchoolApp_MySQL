@@ -25,11 +25,13 @@ public class SecurityConfig {
                         .ignoringRequestMatchers("/public/**")
                         .ignoringRequestMatchers("/api/**")
                         .ignoringRequestMatchers("/data-api/**")
+                        .ignoringRequestMatchers("/timeschool/actuator/**")
                 )
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/displayMessages/**").hasRole("ADMIN")
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/closeMsg").hasRole("ADMIN")
+                        .requestMatchers("/timeschool/actuator/**").hasRole("ADMIN")
                         .requestMatchers("/student/**").hasRole("STUDENT")
                         .requestMatchers("/data-api/**").authenticated()
                         .requestMatchers("/api/**").authenticated()
